@@ -9,15 +9,19 @@ async function httpGetLaunches() {
 }
 
 async function httpSubmitLaunch(launch) {
-  const res = await fetch('http://localhost:8000/launches', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(launch),
-  });
-
-  return await res.json();
+  try {
+    return await fetch('http://localhost:8000/launches', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(launch),
+    });
+  } catch (error) {
+    return {
+      ok: false,
+    };
+  }
 }
 
 async function httpAbortLaunch(id) {

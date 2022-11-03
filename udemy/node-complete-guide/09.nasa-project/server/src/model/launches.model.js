@@ -18,7 +18,13 @@ function getAllLaunches() {
 
 function addNewLaunches(_launch) {
   flightNumber++;
-  launches.set(flightNumber, _launch);
+  launches.set(
+    flightNumber,
+    Object.assign(_launch, {
+      flightNumber,
+      upcoming: true,
+    })
+  );
 }
 
 module.exports = {
