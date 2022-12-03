@@ -13,16 +13,16 @@ mongoose.connection.once("open", () => {
   console.log("Mongodb connection ready!");
 });
 
-mongoose.on("error", (err) => {
-  console.err("err:", err);
-});
+// mongoose.on("error", (err) => {
+//   console.err("err:", err);
+// });
 
 async function startServer() {
   await mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
-    useFindAndModify: false,
+    // useFindAndModify: false,
     autoIndex: true,
-    useUnifiedTopology: true,
+    // useUnifiedTopology: true,
   });
 
   await loadPlanets();
