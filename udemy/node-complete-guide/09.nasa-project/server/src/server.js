@@ -2,6 +2,7 @@ const http = require("http");
 const app = require("./app");
 const mongoose = require("mongoose");
 const { loadPlanets } = require("./model/planets.model");
+const { loadLaunchesData } = require("./model/launches.model");
 
 const PORT = 8000 || process.env.PORT;
 const server = http.createServer(app);
@@ -13,19 +14,14 @@ mongoose.connection.once("open", () => {
   console.log("Mongodb connection ready!");
 });
 
-// mongoose.on("error", (err) => {
-//   console.err("err:", err);
-// });
-
 async function startServer() {
   await mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
-    // useFindAndModify: false,
     autoIndex: true,
-    // useUnifiedTopology: true,
   });
 
   await loadPlanets();
+  await loadLaunchesData();
 
   server.listen(PORT, () => {
     console.log(`server start in ${PORT}`);
